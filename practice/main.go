@@ -25,4 +25,11 @@ func main() {
 
 	fmt.Println("Entered number is : ", aInt)
 
+	// The new() function only allocates memory and does not initialize it
+	m := make(map[string]int)
+
+	m["balaji"] = 25
+
+	fmt.Println(m)
+
 }
