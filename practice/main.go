@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"net/http"
 	"os"
 	"strconv"
 	"strings"
@@ -42,6 +43,18 @@ func main() {
 	fmt.Printf("Successfully written %v characters to the file\n", length)
 	defer file.Close() // wait until all operation is completed
 	defer readFile("file.txt")
+
+	// Making HTTP requests and reading JSON text
+	response, err := http.Get("http://services.explorecalifornia.org/json/tours.php")
+	checkError(err)
+
+	defer response.Body.Close()
+
+	urlContent, err := io.ReadAll(response.Body)
+	fmt.Println("Content read from the url: ", string(urlContent))
+
+	// URL not returning values thus left the code as it is
+
 }
 
 func readFile(fileName string) {
